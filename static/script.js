@@ -28,13 +28,19 @@ async function callGemini(prompt) {
   try {
     const res = await fetch("https://aiassistant-5rff.onrender.com/ask", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt }) // truyền prompt người dùng nhập
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ prompt })
     });
+    if (!res.ok) {
+      console.error("Status lỗi:", res.status);
+      return `❌ Lỗi server: ${res.status}`;
+    }
     const data = await res.json();
     return data.reply || "❌ Không có phản hồi.";
   } catch (e) {
-    console.error(e);
+    console.error("Fetch exception:", e);
     return "❌ Không thể kết nối.";
   }
 }
