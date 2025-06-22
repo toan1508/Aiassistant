@@ -8,14 +8,14 @@ CORS(app)
 def index():
     return render_template("chatai.html")
 
-@app.route("/chat", methods=["POST"])
-def chat():
+app = Flask(__name__)
+CORS(app)
+
+@app.route("/ask", methods=["POST"])
+def ask():
     data = request.get_json()
     prompt = data.get("prompt", "")
-    
-    reply = "👋 Xin chào! Đây là phản hồi thử nghiệm."
-    
-    return jsonify({"reply": reply})
+    return jsonify({"reply": "Phản hồi AI"})
 
 if __name__ == "__main__":
     app.run(debug=True)
