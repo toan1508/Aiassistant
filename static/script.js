@@ -29,7 +29,7 @@ async function callGemini(prompt) {
     const res = await fetch("https://aiassistant-5rff.onrender.com/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify({ prompt }) // truyền prompt người dùng nhập
     });
     const data = await res.json();
     return data.reply || "❌ Không có phản hồi.";
